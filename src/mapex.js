@@ -7,7 +7,6 @@ class Mapex extends React.Component {
     this.add = this.add.bind(this);
     this.handletextChange = this.handletextChange.bind(this);
   }
-
   handletextChange(event) {
     this.setState({ value: event.target.value });
   }
@@ -19,13 +18,17 @@ class Mapex extends React.Component {
     console.log(this.state.arrayNumbers);
   }
   render() {
+    if (this.state.value == 5) {
+      throw new Error('error');
+    }
     return (
       <div>
         <span>{this.props.customprop}</span>
         <ul>
-          {this.state.arrayNumbers.map((item, index) => {
-            return <li key={index.toString()}>{item}</li>;
-          })}
+          {this.state.arrayNumbers &&
+            this.state.arrayNumbers.map((item, index) => {
+              return <li key={index.toString()}>{item}</li>;
+            })}
         </ul>
         <input
           type="text"
@@ -33,7 +36,7 @@ class Mapex extends React.Component {
           onChange={this.handletextChange}
         />
         <button onClick={this.add}>Add </button>
-        <WelcomeGreetings name={this.state.value}/>
+        <WelcomeGreetings name={this.state.value} />
       </div>
     );
   }
